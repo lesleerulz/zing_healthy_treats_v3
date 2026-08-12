@@ -1,0 +1,119 @@
+.auth-page {
+  min-height: 100vh;
+  background-color: var(--ink);
+  color: var(--bone);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 24px;
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.auth-title {
+  font-family: 'Italiana', serif;
+  font-size: 3rem;
+  font-weight: 400;
+  margin: 0;
+  text-align: center;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.auth-field label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--ash);
+}
+
+.auth-field input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  color: var(--bone);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  padding: 8px 0;
+  outline: none;
+  transition: border-color 0.3s ease;
+  cursor: none;
+}
+
+.auth-field input:focus {
+  border-bottom-color: var(--ash);
+}
+
+.auth-button {
+  background-color: transparent;
+  color: var(--bone);
+  border: 1px solid var(--bone);
+  padding: 16px 24px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  cursor: none;
+  transition: all 0.3s ease;
+  margin-top: 16px;
+}
+
+.auth-button:hover:not(:disabled) {
+  background-color: var(--bone);
+  color: var(--ink);
+}
+
+.auth-button:disabled {
+  opacity: 0.5;
+}
+
+.auth-toggle {
+  text-align: center;
+}
+
+.auth-toggle-btn {
+  background: none;
+  border: none;
+  color: var(--ash);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  cursor: none;
+  transition: color 0.3s ease;
+}
+
+.auth-toggle-btn:hover {
+  color: var(--bone);
+}
+
+.auth-message {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  padding: 12px;
+  border: 1px solid var(--line);
+  text-align: center;
+}
+
+.auth-message.error {
+  color: var(--blood);
+  border-color: rgba(184, 101, 31, 0.3);
+}
+
+.auth-message.success {
+  color: var(--ash);
+}

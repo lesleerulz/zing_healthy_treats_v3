@@ -6,12 +6,14 @@ export const NAV_HOME = [
   { label: 'KITCHEN', hash: '#kitchen' },
   { label: 'PANTRY', to: '/pantry' },
   { label: 'ABOUT', to: '/about' },
+  { label: 'ACCOUNT', to: '/account' },
 ]
 
 export const NAV_PAGE = [
   { label: 'HOME', to: '/' },
   { label: 'PANTRY', to: '/pantry' },
   { label: 'ABOUT', to: '/about' },
+  { label: 'ACCOUNT', to: '/account' },
 ]
 
 export const MANIFESTO = [

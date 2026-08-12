@@ -8,7 +8,10 @@ import Home from './pages/Home.jsx'
 import Pantry from './pages/Pantry.jsx'
 import Checkout from './pages/Checkout.jsx'
 import About from './pages/About.jsx'
+import Auth from './pages/Auth.jsx'
+import Account from './pages/Account.jsx'
 import { CartProvider } from './context/CartContext.jsx'
+import { AuthProvider } from './context/AuthContext.jsx'
 
 if ('scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'manual'
@@ -31,19 +34,23 @@ function RouteTransition() {
 export default function App() {
   return (
     <CartProvider>
-      <SmoothScrollProvider>
-        <Cursor />
-      <Grain />
-      <RouteTransition />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/pantry" element={<Pantry />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/archive" element={<Navigate to="/pantry" replace />} />
-        <Route path="/about" element={<About />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-      </SmoothScrollProvider>
+      <AuthProvider>
+        <SmoothScrollProvider>
+          <Cursor />
+          <Grain />
+          <RouteTransition />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/pantry" element={<Pantry />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/archive" element={<Navigate to="/pantry" replace />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/account" element={<Account />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </SmoothScrollProvider>
+      </AuthProvider>
     </CartProvider>
   )
 }

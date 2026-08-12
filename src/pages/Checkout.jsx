@@ -20,6 +20,8 @@ export default function Checkout() {
   const [working, setWorking] = useState(false)
   const [complete, setComplete] = useState(false)
   const [reference, setReference] = useState('')
+  const [paidOrder, setPaidOrder] = useState(null)
+  const [polling, setPolling] = useState(false)
   const root = useRef(null)
   const paystackKey = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY
   const itemCount = useMemo(() => items.reduce((sum, item) => sum + item.quantity, 0), [items])
@@ -32,6 +34,10 @@ export default function Checkout() {
 
     if (!items.length) {
       setError('Your basket is empty. Visit the Pantry to choose a jar first.')
+      return
+    }
+    if (!supabase) {
+      setError('Database connection missing. Please contact support.')
       return
     }
     if (!emailPattern.test(form.email)) {
@@ -79,11 +85,35 @@ export default function Checkout() {
       },
       onSuccess: (transaction) => {
         setReference(transaction.reference)
-        setComplete(true)
-        clearCart()
-        setWorking(false)
+        setPolling(true)
+        
+        let attempts = 0
+        const poll = setInterval(async () => {
+          attempts++
+          if (attempts > 30) {
+            clearInterval(poll)
+            setPolling(false)
+            setError('Payment taking longer than expected to confirm. We will email you once confirmed.')
+            return
+          }
+          
+          const { data } = await supabase.from('guest_order').select('status, total_ksh').eq('reference', transaction.reference).single()
+          if (data && data.status === 'paid') {
+            clearInterval(poll)
+            setPaidOrder({
+               total: data.total_ksh,
+               items: [...items]
+            })
+            setComplete(true)
+            clearCart()
+            setPolling(false)
+            setWorking(false)
+          }
+        }, 3000)
       },
-      onClose: () => setWorking(false),
+      onClose: () => {
+        if (!polling) setWorking(false)
+      },
     })
   }
 
@@ -102,6 +132,23 @@ export default function Checkout() {
             <span>PAYMENT RECEIVED</span>
             <h2>Your morning is on its way.</h2>
             <p>We have your order and will prepare it fresh. Your Paystack reference is <b>{reference}</b>.</p>
+
+            {paidOrder && (
+              <div style={{ textAlign: 'left', background: 'var(--ink)', padding: '2rem', margin: '2rem 0', color: 'var(--bone)', border: '1px solid var(--line)' }}>
+                 <h3 style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.7rem", letterSpacing: "0.2em", marginBottom: "1rem", color: "var(--ash)" }}>ORDER SUMMARY</h3>
+                 {paidOrder.items.map(item => (
+                   <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.8rem', borderBottom: '1px solid var(--line)', paddingBottom: '0.8rem' }}>
+                     <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem", fontStyle: 'italic' }}>{item.quantity} × {item.title}</span>
+                     <span style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.7rem" }}>{money(item.price * item.quantity)}</span>
+                   </div>
+                 ))}
+                 <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem', paddingTop: '0.5rem' }}>
+                   <span style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.7rem", letterSpacing: "0.1em", color: "var(--ash)" }}>TOTAL PAID</span>
+                   <strong style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.85rem" }}>{money(paidOrder.total)}</strong>
+                 </div>
+              </div>
+            )}
+
             <Link className="checkout-button" to="/pantry">RETURN TO THE PANTRY</Link>
           </section>
         ) : (
@@ -139,8 +186,8 @@ export default function Checkout() {
               <label>Delivery address<textarea name="address" value={form.address} onChange={updateField} placeholder="Where should we bring the morning?" rows="4" required /></label>
               <div className="payment-note"><span>PAYMENT</span><p>Secure checkout powered by Paystack. Pay in Kenyan shillings.</p></div>
               {error && <p className="checkout-error" role="alert">{error}</p>}
-              <button className="checkout-button" type="submit" disabled={working || !items.length}>
-                {working ? 'PREPARING YOUR ORDER…' : `PAY ${money(subtotal)}`}
+              <button className="checkout-button" type="submit" disabled={working || polling || !items.length}>
+                {working || polling ? 'VERIFYING PAYMENT…' : `PAY ${money(subtotal)}`}
               </button>
               <p className="secure-note">YOUR DETAILS ARE ONLY USED TO DELIVER THIS ORDER.</p>
             </form>
