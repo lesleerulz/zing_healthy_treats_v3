@@ -10,6 +10,7 @@ import Checkout from './pages/Checkout.jsx'
 import About from './pages/About.jsx'
 import Auth from './pages/Auth.jsx'
 import Account from './pages/Account.jsx'
+import NotFound from './pages/NotFound.jsx'
 import { CartProvider } from './context/CartContext.jsx'
 import { AuthProvider } from './context/AuthContext.jsx'
 
@@ -47,7 +48,7 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/account" element={<Account />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </SmoothScrollProvider>
       </AuthProvider>

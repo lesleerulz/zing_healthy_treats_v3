@@ -101,7 +101,10 @@ export default function Pantry() {
               </button>
               <div className="pantry-card-meta">
                 <span>BLEND {String(index + 1).padStart(2, '0')}</span>
-                <span>{money(product.price)}</span>
+                <span>
+                  {product.quantity <= 10 && <span className="scarcity" style={{ color: 'var(--blood)', marginRight: '1rem', fontStyle: 'italic' }}>ONLY {product.quantity} LEFT</span>}
+                  {money(product.price)}
+                </span>
               </div>
               <button className="pantry-title" onClick={() => setSelected(product)}>{product.title}</button>
               <p className="pantry-description">{product.description}</p>
