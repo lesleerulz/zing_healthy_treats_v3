@@ -36,8 +36,7 @@
   margin-top:2.4rem;font-style:italic;font-weight:300;
   font-size:clamp(1rem,1.8vw,1.5rem);color:var(--bone);letter-spacing:.08em;
 }
-.hero .ht-action { margin-top: 3.5rem; }
-.hero .hero-cta {
+.hero-cta {
   display: inline-block;
   padding: 1.2rem 2.5rem;
   border: 1px solid var(--bone);
@@ -50,7 +49,7 @@
   background: transparent;
   transition: all 0.3s ease;
 }
-.hero .hero-cta:hover {
+.hero-cta:hover {
   background: var(--bone);
   color: var(--ink);
 }
@@ -169,11 +168,14 @@
 }
 @media(max-width:700px){.finale .f-word{font-size:19vw}}
 .finale .f-credits{
-  position:absolute;bottom:8vh;left:0;right:0;z-index:3;text-align:center;
+  position:absolute;bottom:12vh;left:0;right:0;z-index:3;text-align:center;
   font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.32em;color:var(--bone);
   display:flex;justify-content:center;gap:3.5rem;flex-wrap:wrap;opacity:0;
 }
 @media(max-width:700px){.finale .f-credits{gap:1.2rem;font-size:.5rem}}
+.finale .f-action {
+  position:absolute;bottom:5vh;left:0;right:0;z-index:4;text-align:center;opacity:0;
+}
 
 /* ---------- footer ---------- */
 .site-foot{

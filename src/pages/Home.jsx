@@ -215,6 +215,7 @@ export default function Home() {
           0.55,
         )
         .to('.finale .f-credits', { opacity: 1, ease: 'none' }, 0.7)
+        .to('.finale .f-action', { opacity: 1, ease: 'none' }, 0.75)
 
       /* Chapter indicator */
       scope.querySelectorAll('[data-chapter]').forEach((section) => {
@@ -250,7 +251,6 @@ export default function Home() {
         })
         .from('.ht-kicker', { opacity: 0, duration: 1 }, '-=0.8')
         .from('.ht-sub', { opacity: 0, duration: 1 }, '-=0.8')
-        .from('.ht-action', { opacity: 0, y: 20, duration: 1 }, '-=0.6')
     }, root)
 
     ScrollTrigger.refresh()
@@ -292,9 +292,6 @@ export default function Home() {
               ))}
             </h1>
             <div className="ht-sub">what the orchard grew, we roasted by hand</div>
-            <div className="ht-action">
-              <Link to="/pantry" className="hero-cta">VISIT THE PANTRY →</Link>
-            </div>
           </div>
           <div className="ht-meta">
             <span>BATCH 07</span>
@@ -381,6 +378,9 @@ export default function Home() {
             <span>SOURCING — ORCHARD COLLECTIVE</span>
             <span>BLENDING — SMALL BATCH</span>
             <span>JARS — FILLED BY HAND</span>
+          </div>
+          <div className="f-action">
+            <Link to="/pantry" className="hero-cta">STOCK YOUR PANTRY →</Link>
           </div>
         </section>
       </main>
