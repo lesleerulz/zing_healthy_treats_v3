@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import SiteChrome from '../components/SiteChrome.jsx'
 import PageFooter from '../components/PageFooter.jsx'
 import { useCart } from '../context/CartContext.jsx'
+import { useAuth } from '../context/AuthContext.jsx'
 import { useDocumentTitle } from '../hooks/useDocumentTitle.js'
 import { supabase } from '../lib/supabase.js'
 import { NAV_PAGE } from '../data/collection.js'
@@ -13,6 +14,7 @@ const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export default function Checkout() {
   useDocumentTitle('CHECKOUT — ZING HEALTHY TREATS')
+  const { user } = useAuth()
 
   const { items, subtotal, updateQuantity, removeItem, clearCart } = useCart()
   const [form, setForm] = useState({ email: '', phone: '', address: '' })
@@ -151,6 +153,14 @@ export default function Checkout() {
 
             <Link className="checkout-button" to="/pantry">RETURN TO THE PANTRY</Link>
           </section>
+        ) : !user ? (
+          <div className="checkout-layout" style={{ justifyContent: 'center', textAlign: 'center', padding: '10vh 0', borderTop: '1px solid var(--line)' }}>
+            <div style={{ maxWidth: '400px', margin: '0 auto' }}>
+              <h2 style={{ fontFamily: "'Italiana', serif", fontSize: '2.5rem', marginBottom: '1rem' }}>ALMOST THERE</h2>
+              <p style={{ marginBottom: '2rem', fontSize: '1.2rem', color: 'var(--ash)' }}>You must be signed in to verify your contact details and securely place your order.</p>
+              <Link className="checkout-button" to="/auth">SIGN IN OR REGISTER</Link>
+            </div>
+          </div>
         ) : (
           <div className="checkout-layout">
             <section className="checkout-basket">

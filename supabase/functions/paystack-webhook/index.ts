@@ -95,6 +95,20 @@ Deno.serve(async (req) => {
       return new Response('Error confirming payment', { status: 500 })
     }
 
+    // Save verified phone number to user profile if user_id is present
+    const extractedPhone = body.data.customer?.phone || body.data.authorization?.mobile_money_number;
+    if (extractedPhone && order.user_id) {
+      const { error: updateError } = await supabase.auth.admin.updateUserById(order.user_id, { 
+        phone: extractedPhone, 
+        user_metadata: { verified_phone: extractedPhone } 
+      });
+      if (updateError) {
+        console.error('Error updating user phone:', updateError);
+      } else {
+        console.log(`Updated user ${order.user_id} with phone ${extractedPhone}`);
+      }
+    }
+
     // Send invoice email
     try {
       const mailUsername = Deno.env.get('MAIL_USERNAME')
