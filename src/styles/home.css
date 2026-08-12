@@ -36,6 +36,24 @@
   margin-top:2.4rem;font-style:italic;font-weight:300;
   font-size:clamp(1rem,1.8vw,1.5rem);color:var(--bone);letter-spacing:.08em;
 }
+.hero .ht-action { margin-top: 3.5rem; }
+.hero .hero-cta {
+  display: inline-block;
+  padding: 1.2rem 2.5rem;
+  border: 1px solid var(--bone);
+  border-radius: 4px;
+  color: var(--bone);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+.hero .hero-cta:hover {
+  background: var(--bone);
+  color: var(--ink);
+}
 .hero .ht-meta{
   position:absolute;bottom:2rem;left:0;right:0;
   display:flex;justify-content:center;gap:4rem;

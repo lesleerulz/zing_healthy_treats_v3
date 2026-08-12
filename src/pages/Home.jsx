@@ -248,7 +248,8 @@ export default function Home() {
           stagger: 0.05,
         })
         .from('.ht-kicker', { opacity: 0, duration: 1 }, '-=0.8')
-        .from('.ht-sub', { opacity: 0, duration: 1.2 }, '-=0.6')
+        .from('.ht-sub', { opacity: 0, duration: 1 }, '-=0.8')
+        .from('.ht-action', { opacity: 0, y: 20, duration: 1 }, '-=0.6')
     }, root)
 
     ScrollTrigger.refresh()
@@ -290,7 +291,9 @@ export default function Home() {
               ))}
             </h1>
             <div className="ht-sub">what the orchard grew, we roasted by hand</div>
-
+            <div className="ht-action">
+              <Link to="/pantry" className="hero-cta">VISIT THE PANTRY →</Link>
+            </div>
           </div>
           <div className="ht-meta">
             <span>BATCH 07</span>
