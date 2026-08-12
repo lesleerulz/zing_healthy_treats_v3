@@ -1,0 +1,41 @@
+.checkout-main{padding:20vh 6vw 14vh;min-height:80vh}
+.checkout-head{border-bottom:1px solid var(--line);padding-bottom:3rem;margin-bottom:5rem}
+.checkout-head h1{font-family:'Italiana',serif;font-weight:400;font-size:clamp(3.5rem,9vw,8rem);letter-spacing:.1em;line-height:.9}
+.checkout-head>p:last-child{font-size:1.2rem;color:var(--ash);font-weight:300;margin-top:1.5rem}
+.checkout-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr);gap:8vw;align-items:start}
+.section-label{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.3em;color:var(--ash);padding-bottom:1.2rem;border-bottom:1px solid var(--line);margin-bottom:1.5rem}
+.basket-line{display:grid;grid-template-columns:82px 1fr auto auto;gap:1.2rem;align-items:center;padding:1.3rem 0;border-bottom:1px solid var(--line)}
+.basket-line img{width:82px;height:100px;object-fit:cover;filter:sepia(.1) saturate(1.1)}
+.basket-line-copy h2{font-family:'Italiana',serif;font-weight:400;font-size:1.5rem;line-height:1.1}
+.basket-line-copy p{color:var(--ash);font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.12em;margin:.4rem 0}
+.basket-line-copy button{border:0;background:none;color:var(--ash);font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.15em;padding:0}
+.basket-line-copy button:hover{color:var(--blood)}
+.basket-line>strong{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.08em;white-space:nowrap}
+.quantity-control{display:flex;align-items:center;border:1px solid var(--line)}
+.quantity-control button{background:none;border:0;color:var(--bone);font-size:1.2rem;width:2rem;height:2rem}
+.quantity-control span{font-family:'Space Mono',monospace;font-size:.65rem;width:1.2rem;text-align:center}
+.basket-total{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.18em}
+.basket-total strong{font-size:1rem;letter-spacing:.08em;color:var(--bone)}
+.checkout-form{background:var(--bone);color:var(--ink);padding:2.5rem}
+.checkout-form .section-label{color:#8a7355;border-color:rgba(26,18,8,.16)}
+.checkout-form label{display:block;font-family:'Space Mono',monospace;font-size:.56rem;letter-spacing:.2em;color:#6b563c;margin:1.5rem 0}
+.checkout-form input,.checkout-form textarea{display:block;width:100%;background:transparent;border:0;border-bottom:1px solid rgba(26,18,8,.3);color:var(--ink);font:1.1rem 'Cormorant Garamond',serif;padding:.65rem 0;outline:0;resize:vertical}
+.checkout-form input:focus,.checkout-form textarea:focus{border-color:var(--blood)}
+.checkout-form input::placeholder,.checkout-form textarea::placeholder{color:#a08b6e}
+.payment-note{border-top:1px solid rgba(26,18,8,.16);border-bottom:1px solid rgba(26,18,8,.16);padding:1.5rem 0;margin:2.5rem 0 1.5rem}
+.payment-note span{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.2em;color:#8a7355}
+.payment-note p{font-size:1rem;margin-top:.6rem;color:#3b2e1e}
+.checkout-button{display:block;width:100%;border:0;background:var(--blood);color:var(--bone);text-align:center;text-decoration:none;font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.2em;padding:1.15rem 1rem;transition:background .3s,transform .3s}
+.checkout-button:hover:not(:disabled){background:#d27a2a;transform:translateY(-3px)}
+.checkout-button:disabled{opacity:.55}
+.checkout-error{color:#9b431f;font-family:'Space Mono',monospace;font-size:.6rem;line-height:1.5;margin:1rem 0}
+.secure-note{color:#8a7355;font-family:'Space Mono',monospace;font-size:.48rem;letter-spacing:.16em;text-align:center;line-height:1.5;margin-top:1.2rem}
+.empty-basket{border-bottom:1px solid var(--line);padding:3rem 0;color:var(--ash);font-size:1.2rem}
+.empty-basket a{color:var(--bone);font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.2em;display:inline-block;margin-top:1rem}
+.checkout-success{max-width:680px;background:var(--bone);color:var(--ink);padding:clamp(2rem,7vw,6rem);text-align:center;margin:0 auto}
+.checkout-success>span{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.28em;color:#8a7355}
+.checkout-success h2{font-family:'Italiana',serif;font-weight:400;font-size:clamp(2.6rem,6vw,5rem);line-height:1;margin:1.2rem 0}
+.checkout-success p{font-size:1.15rem;line-height:1.6;color:#3b2e1e;margin-bottom:2rem}
+.checkout-success b{font-family:'Space Mono',monospace;font-size:.7rem;word-break:break-all}
+@media(max-width:850px){.checkout-layout{grid-template-columns:1fr;gap:4rem}}
+@media(max-width:600px){.checkout-main{padding:17vh 8vw 12vh}.checkout-form{padding:2rem 1.4rem}.basket-line{grid-template-columns:62px 1fr auto}.basket-line img{width:62px;height:78px}.basket-line>strong{grid-column:2;grid-row:2}.quantity-control{grid-column:3;grid-row:1}.basket-line-copy h2{font-size:1.25rem}}
