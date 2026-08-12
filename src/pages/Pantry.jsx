@@ -133,6 +133,14 @@ export default function Pantry() {
               <span className="modal-label">THE JAR NOTE</span>
               <h2>{selected.title}</h2>
               <p>{selected.description}</p>
+              
+              <div style={{ margin: '2rem 0', padding: '1rem', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }}>
+                <span className="modal-label" style={{ display: 'block', marginBottom: '0.5rem' }}>SOURCING & INGREDIENTS</span>
+                <p style={{ fontSize: '0.8rem', fontFamily: "'Space Mono', monospace", color: 'var(--ash)', margin: 0, lineHeight: 1.6 }}>
+                  Sourced from certified small-batch orchards. Zero artificial preservatives, refined sugars, or seed oils. Roasted and packed by hand in Z. Kitchen.
+                </p>
+              </div>
+
               <strong>{money(selected.price)}</strong>
               <button className="add-button" onClick={() => { addToCart(selected); setSelected(null) }}>ADD TO BASKET</button>
             </div>
