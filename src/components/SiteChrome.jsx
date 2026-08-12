@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useLenis } from '../hooks/useLenis.jsx'
+import { useTimeOfDay } from '../hooks/useTimeOfDay'
 
 export default function SiteChrome({ links }) {
   const [open, setOpen] = useState(false)
   const lenis = useLenis()
   const { pathname } = useLocation()
+  const timeOfDay = useTimeOfDay()
 
   useEffect(() => setOpen(false), [pathname])
 
@@ -86,7 +88,7 @@ export default function SiteChrome({ links }) {
         {links.map(renderLink)}
         <div className="mnav-foot">
           <span>BATCH №7</span>
-          <span>THE MORNING ROAST</span>
+          <span>THE {timeOfDay.label} ROAST</span>
         </div>
       </div>
     </>

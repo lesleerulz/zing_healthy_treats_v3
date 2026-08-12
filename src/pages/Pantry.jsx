@@ -36,7 +36,7 @@ export default function Pantry() {
       if (!active) return
       if (queryError) {
         console.error('product catalog failed', queryError)
-        setError('The pantry is taking a moment to warm up. Please refresh and try again.')
+        setError(`The pantry is taking a moment to warm up. Please refresh and try again. (Debug: ${queryError.message || JSON.stringify(queryError)})`)
       } else {
         setProducts(data ?? [])
       }

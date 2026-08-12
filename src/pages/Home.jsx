@@ -6,6 +6,7 @@ import Preloader from '../components/Preloader.jsx'
 import ChapterTag from '../components/ChapterTag.jsx'
 import { useDocumentTitle } from '../hooks/useDocumentTitle.js'
 import { useStallGuard } from '../hooks/useStallGuard.js'
+import { useTimeOfDay } from '../hooks/useTimeOfDay.js'
 import { images } from '../images.js'
 import { LOOKS, MANIFESTO, NAV_HOME, STATS } from '../data/collection.js'
 import '../styles/home.css'
@@ -56,7 +57,9 @@ function ManifestoCopy() {
 }
 
 export default function Home() {
-  useDocumentTitle('ZING — Batch №7: THE MORNING ROAST')
+  const timeOfDay = useTimeOfDay()
+
+  useDocumentTitle(`ZING — Batch №7: THE ${timeOfDay.label} ROAST`)
 
   const root = useRef(null)
   const [ready, setReady] = useState(false)
@@ -229,6 +232,8 @@ export default function Home() {
     return () => ctx.revert()
   }, [])
 
+
+
   useEffect(() => {
     if (!ready) return
 
@@ -273,11 +278,11 @@ export default function Home() {
           <div className="hero-shade" />
           <div className="hero-title">
             <div className="ht-kicker">ZING HEALTHY TREATS — BATCH №7</div>
-            <h1 aria-label="MORNING">
-              {['MORN', 'ING'].map((line) => (
-                <span className="line" key={line}>
+            <h1 aria-label={timeOfDay.label}>
+              {timeOfDay.lines.map((line, lineIndex) => (
+                <span className="line" key={lineIndex}>
                   {[...line].map((char, i) => (
-                    <span className="char" key={i}>
+                    <span className="char" key={`${lineIndex}-${i}`}>
                       {char}
                     </span>
                   ))}
@@ -285,6 +290,7 @@ export default function Home() {
               ))}
             </h1>
             <div className="ht-sub">what the orchard grew, we roasted by hand</div>
+
           </div>
           <div className="ht-meta">
             <span>BATCH 07</span>
@@ -378,7 +384,7 @@ export default function Home() {
       <footer className="site-foot">
         <div className="f-logo">ZING</div>
         <div className="f-note">
-          BATCH №7 — THE MORNING ROAST
+          BATCH №7 — THE {timeOfDay.label} ROAST
           <br />
           SMALL BATCH · ROASTED TO ORDER
           <br />© MMXXVI — NOTHING LASTS, LEAST OF ALL A WARM JAR
